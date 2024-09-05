@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-function Navelement({ menuOpen, setMenuOpen }) {
+function Navelement({ menuOpen, setMenuOpen, navDark }) {
   const location = useLocation();
   const navigate = useNavigate(); 
   const currentPath = location.pathname;
@@ -9,7 +9,7 @@ function Navelement({ menuOpen, setMenuOpen }) {
   const getLinkClass = (link) => (
     currentPath === link
       ? 'text-orange-600 underline'
-      : 'hover:text-orange-500'
+      : navDark ? 'hover:text-gray-300' : 'hover:text-gray-700'
   );
 
   const handleLinkClick = (event, link) => {
@@ -33,39 +33,35 @@ function Navelement({ menuOpen, setMenuOpen }) {
   };
 
   return (
-    <div id="nav-bar" className="bg-black w-full h-16 md:h-24 flex items-center justify-between px-4 md:px-8 ">
-      {/* <img src="/snu-logo.svg" alt="SNU" className=" w-40 h-12 md:h-16" /> */}
-      <span className='hidden md:block font-bold text-white font-dosis text-3xl'>Electricity Demand Forecast</span>
+    <div id="nav-bar" className={`w-full h-16 md:h-24 flex items-center justify-between px-4 md:px-8 ${navDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      <span className={`hidden md:block font-bold font-dosis text-3xl ${navDark ? 'text-white' : 'text-black'}`}>
+        Electricity Demand Forecast
+      </span>
 
-      
       <button
-        className="xl:hidden text-white text-3xl justify-center"
+        className={`${navDark ? 'text-white' : 'text-black'} xl:hidden text-3xl justify-center`}
         onClick={() => setMenuOpen(!menuOpen)}
       >
         {menuOpen ? '✖' : '☰'}
       </button>
-      
-      <nav className="hidden xl:flex items-center space-x-6 md:space-x-12 py-2 font-dosis text-sm md:text-md">
+
+      <nav className="hidden xl:flex items-center space-x-6 md:space-x-20 py-2 font-dosis text-sm md:text-md mr-10">
         {['/', '/insights'].map((link) => (
           <Link
             key={link}
             to={link}
-            className={`text-white text-base md:text-md font-bold text-center transition-transform duration-300 p-2 rounded-lg ${getLinkClass(link)}`}
+            className={`text-base md:text-lg font-bold text-center transition-transform duration-300 p-2 rounded-lg ${getLinkClass(link)}`}
             onClick={(event) => handleLinkClick(event, link)}
           >
-            {link === '/' ? 'Home' :
-             'Insights'}
+            {link === '/' ? 'Home' : 'Insights'}
           </Link>
         ))}
       </nav>
 
-      {/* <img src="/ssn-logo.svg" alt="SSN" className="w-48 h-12 md:h-16" /> */}
-
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-20 flex flex-col items-center justify-center">
+        <div className={`fixed inset-0 ${navDark ? 'bg-black' : 'bg-white'} bg-opacity-80 z-20 flex flex-col items-center justify-center`}>
           <button
-            className="absolute top-4 right-4 text-white text-3xl"
+            className="absolute top-4 right-4 text-3xl"
             onClick={() => setMenuOpen(false)}
           >
             ✖
@@ -75,11 +71,10 @@ function Navelement({ menuOpen, setMenuOpen }) {
               <Link
                 key={link}
                 to={link}
-                className={`transition-transform w-full p-2 rounded-md ${getLinkClass(link)} bg-white text-center text-black duration-300 hover:scale-110`}
+                className={`transition-transform w-full p-2 rounded-md ${getLinkClass(link)} ${navDark ? 'bg-white text-black' : 'bg-black text-white'} text-center duration-300 hover:scale-110`}
                 onClick={(event) => handleLinkClick(event, link)}
               >
-                {link === '/' ? 'Home' :
-                 'Insights'}
+                {link === '/' ? 'Home' : 'Insights'}
               </Link>
             ))}
           </nav>
