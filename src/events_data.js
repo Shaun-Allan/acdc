@@ -1,15 +1,15 @@
 const events = [
     {
         date: "12 - Jan - 2024",
-        img: "/hackathon.jpg",
+        img: "/graph1.png",
     },
     {
         date: "12 - Jan - 2024",
-        img: "/hackathon.jpg",
+        img: "/graph2.png",
     },
     {
         date: "12 - Jan - 2024",
-        img: "/hackathon.jpg",
+        img: "/graph3.png",
     },
 ]
 export default events;

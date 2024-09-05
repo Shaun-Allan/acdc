@@ -51,9 +51,9 @@ function Graphs() {
               </Dropdown>
             </Tooltip>
             <Image
-              isZoomed
+            //   isZoomed
               width={900}
-              height={600}
+            //   height={600}
               alt="NextUI Fruit Image with Zoom"
               src={selectedEvent.img}
             />
